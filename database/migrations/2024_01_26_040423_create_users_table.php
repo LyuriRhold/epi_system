@@ -1,12 +1,19 @@
 <?php
 
+// database/migrations/xxxx_xx_xx_create_users_table.php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    public function up(): void
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -19,15 +26,21 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->date('birth_day');
             $table->string('phone_number');
-            $table->string('position')->nullable();
-            $table->string('department')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('position');
+            $table->string('department');
+            $table->integer('Status');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes(); // Optional, adds a deleted_at column for soft deletes
         });
     }
 
-    public function down(): void
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
         Schema::dropIfExists('users');
     }

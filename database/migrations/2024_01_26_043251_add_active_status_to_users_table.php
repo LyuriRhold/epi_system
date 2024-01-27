@@ -1,28 +1,47 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+<?php
 
-return new class extends Migration
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class LoginSession extends Model
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->integer('active_status')->default(0); // You can adjust the default value as needed
-    });
+    use HasFactory;
+
+    protected $table = "users"; // Replace with your actual table name
+    protected $primaryKey = "id";
+
+    protected $fillable = [
+        'user_id',
+        'user_fullname',
+        'user_type',
+        'date_today',
+        'login_time',
+        'last_activity_time',
+        'status',
+        'duration',
+        'first_name',
+        'last_name',
+        'employee_id',
+        'email',
+        'gender',
+        'password',
+        'address',
+        'birth_day',
+        'phone_number',
+        'position',
+        'department',
+        'Status',
+    ];
+
+    // Assuming that the 'users' table has the 'remember_token' and 'timestamps' fields
+    public $timestamps = true;
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
-    }
-};
